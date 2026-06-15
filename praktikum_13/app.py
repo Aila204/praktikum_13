@@ -1,9 +1,12 @@
+import os
 import streamlit as st
 import joblib
 import numpy as np
 import pandas as pd
 import plotly.graph_objects as go
 import plotly.express as px
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 st.set_page_config(
     page_title="Prediksi Harga Rumah Tangerang",
@@ -97,8 +100,8 @@ st.markdown("""
 # ── Load artifacts ───────────────────────────────────────────────────────────
 @st.cache_resource
 def load_artifacts():
-    model = joblib.load('model.pkl')
-    district_mean_price = joblib.load('district_mean_price.pkl')
+    model = joblib.load(os.path.join(BASE_DIR, 'model.pkl'))
+    district_mean_price = joblib.load(os.path.join(BASE_DIR, 'district_mean_price.pkl'))
     return model, district_mean_price
 
 model, district_mean_price = load_artifacts()
